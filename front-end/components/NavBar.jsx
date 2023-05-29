@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [theme, setTheme] = useState("light");
@@ -55,7 +55,8 @@ const NavBar = () => {
                 </li>
 
                 <li>
-                  <Link to="/create"
+                  <Link
+                    to="/create"
                     className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
                     href="/"
                   >
@@ -64,12 +65,13 @@ const NavBar = () => {
                 </li>
 
                 <li>
-                  <a
+                  <Link
+                    to="/blog"
                     className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
                     href="/"
                   >
                     All Blogs
-                  </a>
+                  </Link>
                 </li>
 
                 {/* <li>
@@ -165,7 +167,9 @@ const NavBar = () => {
       {/* Hamburger menu content */}
       <div
         className={`md:hidden ${
-          navbarOpen ? "relative flex justify-end z-10" : "hidden"
+          navbarOpen
+            ? "relative flex justify-end z-10 animate fadeIn navAnimation"
+            : "hidden"
         }`}
         tabIndex="0"
       >
@@ -176,7 +180,10 @@ const NavBar = () => {
             </button>
           </li>
           <li>
-            <Link to="/create" className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100">
+            <Link
+              to="/create"
+              className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
+            >
               Create Blog
             </Link>
           </li>

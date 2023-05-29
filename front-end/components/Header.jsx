@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="animate fadeInLeft one">
@@ -16,16 +17,16 @@ const Header = () => {
             </p>
 
             <div className="mt-4 md:mt-8">
-              <a
+              <Link
+                to="/blog"
                 className="group relative inline-block focus:outline-none focus:ring"
-                href="/download"
               >
                 <span className="absolute inset-0 translate-x-0 translate-y-0 bg-myOrange transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5"></span>
 
                 <span className="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black dark:text-white">
                   Read blog
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

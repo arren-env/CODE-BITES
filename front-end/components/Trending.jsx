@@ -1,6 +1,6 @@
 const Trending = () => {
   return (
-    <div className="cursor-pointer">
+    <div className="cursor-pointer hover:shadow-md pl-2 dark:hover:shadow-zinc-800">
       <div className="flex items-center gap-2">
         <img
           src="https://cdn-icons-png.flaticon.com/128/9308/9308891.png"
@@ -9,7 +9,6 @@ const Trending = () => {
         />
         <h1 className="text-xs text-black dark:text-white">Zenitsu</h1>
       </div>
-
       <div>
         <h1 className="text-base/tight font-semibold text-black dark:text-white line-clamp-2 my-2">
           How I used Mid journey to design a brand identity best is react js for

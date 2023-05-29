@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Login from "../components/Login";
 import Registration from "../components/Registration";
 import CreateBlog from "../components/CreateBlog";
+import SingleBlog from "../components/SingleBlog";
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
           </Route>
           <Route path="/create">
             <CreateBlog/>
+          </Route>
+          <Route path="/blog">
+            <SingleBlog/>
           </Route>
         </Switch>
         <Footer />

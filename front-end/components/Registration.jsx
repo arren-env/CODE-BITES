@@ -6,12 +6,13 @@ const Registration = () => {
         <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
           <div className="mx-auto max-w-lg text-center">
             <h1 className="text-2xl font-bold sm:text-3xl dark:text-myOrange">
-              Get started today with <span className="font-mono dark:text-myOrange">CODE BITES</span>
+              Get started today with{" "}
+              <span className="font-mono dark:text-myOrange">CODE BITES</span>
             </h1>
 
             <p className="mt-4 text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-              nulla eaque error neque ipsa culpa autem, at itaque nostrum!
+              Learn how to get the most out of your tech devices, from
+              troubleshooting common problems to finding hidden features.
             </p>
           </div>
 
