@@ -1,8 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } from "../store/constants";
+import { useAuth } from "../Components/Hooks/useAuth";
+import { useSignout } from "../Components/Hooks/useSignout";
 
 const NavBar = () => {
+
+  const { user } = useAuth();
+  const { signOut } = useSignout();
+  const handleLogout = () => {
+    signOut();
+  }
+
+  // ----------------------- Auth State Management -----------------------
+
   const [theme, setTheme] = useState("light");
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
@@ -116,12 +127,16 @@ const NavBar = () => {
                 </label>
               </div>
 
-              <div className="sm:flex sm:gap-4">
+              {user && <>
+                {user.name}
+                <button className="btn" onClick={handleLogout}>Logout</button>
+              </>}
+              {!user && <div className="sm:flex sm:gap-4">
                 <div className="hidden sm:flex">
                   <Link
                     to={ROUTE_LOGIN}
                     className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
-                    
+
                   >
                     Login
                   </Link>
@@ -135,7 +150,7 @@ const NavBar = () => {
                     Register
                   </Link>
                 </div>
-              </div>
+              </div>}
 
               <div className="block md:hidden">
                 <button
@@ -166,8 +181,8 @@ const NavBar = () => {
       {/* Hamburger menu content */}
       <div
         className={`md:hidden ${navbarOpen
-            ? "relative flex justify-end z-10 animate fadeIn navAnimation"
-            : "hidden"
+          ? "relative flex justify-end z-10 animate fadeIn navAnimation"
+          : "hidden"
           }`}
         tabIndex="0"
       >
@@ -191,7 +206,7 @@ const NavBar = () => {
             </a>
           </li>
         </ul>
-        <div className="absolute flex justify-center w-[60%] gap-5 items-end top-[87px] py-10 pb-7 mt-5 dark:bg-black bg-white">
+        {!user && <div className="absolute flex justify-center w-[60%] gap-5 items-end top-[87px] py-10 pb-7 mt-5 dark:bg-black bg-white">
           <div className="sm:hidden">
             <Link
               to={ROUTE_REGISTER}
@@ -204,7 +219,7 @@ const NavBar = () => {
             <Link
               to={ROUTE_LOGIN}
               className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
-              
+
             >
               Login
             </Link>
@@ -219,7 +234,8 @@ const NavBar = () => {
               Profile
             </span>
           </div> */}
-        </div>
+        </div>}
+        {user && user.name}
       </div>
     </nav>
   );

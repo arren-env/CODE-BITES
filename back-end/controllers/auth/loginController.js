@@ -32,11 +32,11 @@ const loginController = {
             // Toekn
             const access_token = JwtService.sign({ _id: user._id, role: user.role });
             const refresh_token = JwtService.sign({ _id: user._id, role: user.role }, '1y', REFRESH_SECRET);
-        // database whitelist
+            // database whitelist
             await RefreshToken.create({ token: refresh_token });
-            res.json({ access_token, refresh_token });
+            res.json({ access_token, refresh_token, user });
 
-        } catch(err) {
+        } catch (err) {
             return next(err);
         }
 
@@ -54,7 +54,7 @@ const loginController = {
 
         try {
             await RefreshToken.deleteOne({ token: req.body.refresh_token });
-        } catch(err) {
+        } catch (err) {
             return next(new Error('Something went wrong in the database'));
         }
         res.json({ status: 1 });
