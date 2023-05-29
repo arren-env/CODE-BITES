@@ -18,15 +18,14 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
     console.log('DB connected...');
+    global.appRoot = path.resolve(__dirname);
+    app.use(cors());
+    app.use(express.urlencoded({ extended: false }));
+    app.use(express.json());
+    app.use('/api', routes);
+    app.use('/uploads', express.static('uploads'));
+    
+    app.use(errorHandler);
+    const PORT = process.env.PORT || APP_PORT;
+    app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
 });
-
-global.appRoot = path.resolve(__dirname);
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use('/api', routes);
-app.use('/uploads', express.static('uploads'));
-
-app.use(errorHandler);
-const PORT = process.env.PORT || APP_PORT;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));

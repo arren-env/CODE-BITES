@@ -18,7 +18,9 @@ router.put('/products/:id', [auth, admin], productController.update);
 router.delete('/products/:id', [auth, admin], productController.destroy);
 router.get('/products', productController.index);
 router.get('/products/:id', productController.show);
-
+router.get('/*',(req,res)=>{
+    res.end("404 not found!");
+})
 
 
 export default router;

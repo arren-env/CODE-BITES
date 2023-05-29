@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } from "../store/constants";
 
 const NavBar = () => {
   const [theme, setTheme] = useState("light");
@@ -30,14 +31,13 @@ const NavBar = () => {
   };
 
   return (
-    <header aria-label="Site Header" className="bg-white dark:bg-black">
+    <nav aria-label="Site Header" className="bg-white dark:bg-black">
       <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-1 md:flex md:items-center md:gap-12">
             <Link
-              to="/"
+              to={ROUTE_HOME}
               className="block font-mono text-2xl text-black dark:text-myOrange"
-              href="/"
             >
               <h1>CODE BITES</h1>
             </Link>
@@ -47,7 +47,7 @@ const NavBar = () => {
             <nav aria-label="Site Nav" className="hidden md:block">
               <ul className="flex items-center gap-6 -mr-6 text-sm">
                 <li>
-                  <Link to="/">
+                  <Link to={ROUTE_HOME}>
                     <button className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100">
                       Home
                     </button>
@@ -56,9 +56,8 @@ const NavBar = () => {
 
                 <li>
                   <Link
-                    to="/create"
+                    to={ROUTE_CREATE}
                     className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
-                    href="/"
                   >
                     Create Blog
                   </Link>
@@ -66,9 +65,9 @@ const NavBar = () => {
 
                 <li>
                   <Link
-                    to="/blog"
+                    to={ROUTE_BLOG}
                     className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
-                    href="/"
+
                   >
                     All Blogs
                   </Link>
@@ -120,18 +119,18 @@ const NavBar = () => {
               <div className="sm:flex sm:gap-4">
                 <div className="hidden sm:flex">
                   <Link
-                    to="/login"
+                    to={ROUTE_LOGIN}
                     className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
-                    href="/"
+                    
                   >
                     Login
                   </Link>
                 </div>
                 <div className="hidden sm:flex">
                   <Link
-                    to="/registration"
+                    to={ROUTE_REGISTER}
                     className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline button hover:text-black"
-                    href="/"
+
                   >
                     Register
                   </Link>
@@ -166,11 +165,10 @@ const NavBar = () => {
 
       {/* Hamburger menu content */}
       <div
-        className={`md:hidden ${
-          navbarOpen
+        className={`md:hidden ${navbarOpen
             ? "relative flex justify-end z-10 animate fadeIn navAnimation"
             : "hidden"
-        }`}
+          }`}
         tabIndex="0"
       >
         <ul className="absolute w-[60%] space-y-4 text-center bg-white dark:bg-black flex flex-col justify-start pb-1">
@@ -181,7 +179,7 @@ const NavBar = () => {
           </li>
           <li>
             <Link
-              to="/create"
+              to={ROUTE_CREATE}
               className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
             >
               Create Blog
@@ -196,18 +194,17 @@ const NavBar = () => {
         <div className="absolute flex justify-center w-[60%] gap-5 items-end top-[87px] py-10 pb-7 mt-5 dark:bg-black bg-white">
           <div className="sm:hidden">
             <Link
-              to="/registration"
+              to={ROUTE_REGISTER}
               className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline"
-              href="/"
             >
               Register
             </Link>
           </div>
           <div className="sm:hidden">
             <Link
-              to="/login"
+              to={ROUTE_LOGIN}
               className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
-              href="/"
+              
             >
               Login
             </Link>
@@ -224,7 +221,7 @@ const NavBar = () => {
           </div> */}
         </div>
       </div>
-    </header>
+    </nav>
   );
 };
 

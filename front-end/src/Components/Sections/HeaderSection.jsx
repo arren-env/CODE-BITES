@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const Header = () => {
+const HeaderSection = () => {
   return (
     <div className="animate fadeInLeft one">
       <section className="overflow-hidden bg-white dark:bg-black sm:grid sm:grid-cols-2 sm:items-center -mt-3 mb-6 mx-6">
@@ -41,4 +41,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderSection;
