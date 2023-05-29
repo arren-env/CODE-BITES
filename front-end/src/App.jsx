@@ -20,13 +20,13 @@ const App = () => {
             <Login />
           </Route>
           <Route path="/registration">
-            <Registration/>
+            <Registration />
           </Route>
           <Route path="/create">
-            <CreateBlog/>
+            <CreateBlog />
           </Route>
           <Route path="/blog">
-            <SingleBlog/>
+            <SingleBlog />
           </Route>
         </Switch>
         <Footer />

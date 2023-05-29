@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
-      <div>
+      <div className="min-h-[70vh]">
         <div className="flex flex-col gap-7 items-center">
           <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-lg text-center">
-              <h1 className="text-2xl font-mono text-black dark:text-myOrange sm:text-3xl ">
+              <h1 className="font-bold text-2xl font-mono text-black dark:text-myOrange sm:text-3xl ">
                 CODE BITES
               </h1>
               <p className="mt-4 text-gray-500">

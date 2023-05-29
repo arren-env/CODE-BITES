@@ -6,21 +6,21 @@ const TrendingPage = () => {
       <h1 className="text-2xl text-black dark:text-myOrange underline underline-offset-8 ml-6">
         Trending
       </h1>
-      <div className="grid gap-4 p-5 xs:grid-flow-row xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 px-5 animate fadeInUpBig two">
+      <div className="grid gap-4 p-5 xs:grid-flow-row xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 px-5 animate fadeInUp two">
         <div className="">
-          <Trending/>
+          <Trending />
         </div>
         <div>
-          <Trending/>
+          <Trending />
         </div>
         <div>
-          <Trending/>
+          <Trending />
         </div>
         <div>
-          <Trending/>
+          <Trending />
         </div>
         <div>
-          <Trending/>
+          <Trending />
         </div>
       </div>
     </>

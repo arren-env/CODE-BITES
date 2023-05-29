@@ -167,9 +167,7 @@ const NavBar = () => {
       {/* Hamburger menu content */}
       <div
         className={`md:hidden ${
-          navbarOpen
-            ? "relative flex justify-end z-10 animate fadeIn navAnimation"
-            : "hidden"
+          navbarOpen ? "relative flex justify-end z-10" : "hidden"
         }`}
         tabIndex="0"
       >

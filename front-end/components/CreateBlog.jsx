@@ -8,7 +8,7 @@ const CreateBlog = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-[70vh]">
       <form
         action=""
         className="md:py-7 md:px-36 dark:bg-black bg-white"

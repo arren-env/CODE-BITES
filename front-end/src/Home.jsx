@@ -5,12 +5,12 @@ import TrendingPage from "../components/TrendingPage";
 
 const Home = () => {
   return (
-    <>
+    <div className="min-h-[70vh]">
       <HeaderPage />
       {/* <TopTopicsPage/> */}
       <TrendingPage />
       <BlogsPage />
-    </>
+    </div>
   );
 };
 
