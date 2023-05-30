@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } from "../store/constants";
 import { useAuth } from "../Components/Hooks/useAuth";
-import { useSignout } from "../Components/Hooks/useSignout";
 
 const NavBar = () => {
 
-  const { user } = useAuth();
-  const { signOut } = useSignout();
+  const { user, signOut } = useAuth();
   const handleLogout = () => {
     signOut();
   }
