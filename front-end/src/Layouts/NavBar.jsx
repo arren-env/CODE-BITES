@@ -189,9 +189,9 @@ const NavBar = () => {
       >
         <ul className="absolute w-[60%] space-y-4 text-center bg-white dark:bg-black flex flex-col justify-start pb-1">
           <li>
-            <button className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100">
+            <Link to={ROUTE_HOME} className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100">
               Home
-            </button>
+            </Link>
           </li>
           <li>
             <Link
