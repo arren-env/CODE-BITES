@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { ROUTE_LOGIN } from "../../store/constants";
 import { parseFormData } from "../../utils";
 import { useAuth } from "../Hooks/useAuth";
+import { useSelector } from "react-redux";
 
 function RegisterForm() {
 
-    const { signUp, error, loading, user } = useAuth();
+    const { signUp, error, loading } = useAuth();
 
     const handleRegister = e => {
         e.preventDefault();

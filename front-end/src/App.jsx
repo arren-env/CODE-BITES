@@ -1,16 +1,20 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import Routes from "./Routes";
 import './index.css';
-import { AuthContextProvider } from "./store/contexts";
+import { Provider } from "react-redux";
+import ConfigureStore from "./store";
 
 const App = () => {
+  
+  const store = ConfigureStore();
+
   return (
     <div className="App">
-      <AuthContextProvider>
+      <Provider store={store}>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
-      </AuthContextProvider>
+      </Provider>
     </div>
   );
 };

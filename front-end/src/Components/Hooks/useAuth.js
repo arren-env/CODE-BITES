@@ -1,20 +1,14 @@
-import { useContext } from "react";
-import { AuthContext } from "../../store/contexts/index";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { authLogin, authLogout } from "../../store/actions";
 import { LOGIN_ENDPOINT, REGISTER_ENDPOINT } from "../../store/constants";
-import { useState } from "react";
-import { useEffect } from "react";
 
 export const useAuth = () => {
-    const auth = useContext(AuthContext);
-    if (auth === undefined) {
-        throw new Error("useAuth() must be used inside Auth Provider")
-    };
 
+    const dispatch = useDispatch();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isMounted, setIsMounted] = useState(true);
-    const { dispatch } = auth;
 
     const signIn = async (email, password) => {
         setError(null)
@@ -39,7 +33,7 @@ export const useAuth = () => {
             }
 
             // Update Global User State
-            dispatch(authLogin(data.user));
+            dispatch(authLogin(data));
 
             if (isMounted) {
                 setIsLoading(false)
@@ -79,7 +73,7 @@ export const useAuth = () => {
             }
 
             // Update Global User State
-            dispatch(authLogin(data.user));
+            dispatch(authLogin(data));
 
             if (isMounted) {
                 setIsLoading(false)
@@ -106,5 +100,5 @@ export const useAuth = () => {
         };
     }, []);
 
-    return { ...auth, signIn, signUp, signOut, loading: isLoading, error };
+    return { signIn, signUp, signOut, loading: isLoading, error };
 }

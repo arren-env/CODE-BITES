@@ -1,5 +1,5 @@
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes as Switch } from "react-router-dom";
 import { CreateBlogPage, HomePage, LoginPage, RegistrationPage } from "./Pages";
 import NotFound from "./Pages/NotFound";
 import { ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_NOT_FOUND, ROUTE_REGISTER } from "./store/constants";
@@ -7,24 +7,12 @@ import { ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_NOT_FOUND, ROUTE_REGISTER 
 function Routes() {
     return (
         <Switch>
-            <Route exact path={ROUTE_HOME}>
-                <HomePage />
-            </Route>
-            <Route path={ROUTE_LOGIN}>
-                <LoginPage />
-            </Route>
-            <Route path={ROUTE_REGISTER}>
-                <RegistrationPage />
-            </Route>
-            <Route path={ROUTE_CREATE}>
-                <CreateBlogPage />
-            </Route>
-            {/* <Route path={ROUTE_BLOG}>
-                <SingleBlog />
-            </Route> */}
-            <Route path={ROUTE_NOT_FOUND}>
-                <NotFound />
-            </Route>
+            <Route element={<HomePage />} path={ROUTE_HOME} />
+            <Route element={<LoginPage />} path={ROUTE_LOGIN} />
+            <Route element={<RegistrationPage />} path={ROUTE_REGISTER} />
+            <Route element={<CreateBlogPage />} path={ROUTE_CREATE} />
+            {/* <Route element={<SingleBlog />} path={ROUTE_BLOG} /> */}
+            <Route element={<NotFound />} path={ROUTE_NOT_FOUND} />
         </Switch>
     );
 }

@@ -1,25 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } from "../store/constants";
 import { useAuth } from "../Components/Hooks/useAuth";
+import { fetchUserData, toggleMode } from "../store/actions";
+import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } from "../store/constants";
 
 const NavBar = () => {
 
-  const { user, signOut } = useAuth();
-  const handleLogout = () => {
-    signOut();
-  }
+  const [theme, { user, accessToken }] = useSelector(state => [state.theme, state.auth]);
+  const dispatch = useDispatch();
+  const { signOut } = useAuth();
+  const handleLogout = () => signOut();
 
-  // ----------------------- Auth State Management -----------------------
-
-  const [theme, setTheme] = useState("light");
   useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
+    if (accessToken && !user) {
+      dispatch(fetchUserData(accessToken));
     }
-  }, []);
+  }, [accessToken]);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -29,15 +26,10 @@ const NavBar = () => {
     }
   }, [theme]);
 
-  const changeTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
+  const changeTheme = () => dispatch(toggleMode());
   const [navbarOpen, setNavbarOpen] = useState(false);
-
-  const toggleNavbar = () => {
-    setNavbarOpen(!navbarOpen);
-  };
+  const toggleNavbar = () => setNavbarOpen(!navbarOpen);
 
   return (
     <nav aria-label="Site Header" className="bg-white dark:bg-black">
