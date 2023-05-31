@@ -14,7 +14,7 @@ const productSchema = new Schema(
                 if (process.env.ON_HEROKU == 'true') {
                     return `${image}`;
                 }
-                return `${APP_URL}/${image}`;
+                return `${APP_URL}/${image.replace(/\\/g, '/')}`;
             },
         },
     },

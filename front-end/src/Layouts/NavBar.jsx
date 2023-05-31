@@ -3,11 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuth } from "../Components/Hooks/useAuth";
 import { fetchUserData, toggleMode } from "../store/actions";
-import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } from "../store/constants";
+import {
+  ROUTE_BLOG,
+  ROUTE_CREATE,
+  ROUTE_HOME,
+  ROUTE_LOGIN,
+  ROUTE_REGISTER,
+} from "../store/constants";
 
 const NavBar = () => {
-
-  const [theme, { user, accessToken, authReady }] = useSelector(state => [state.theme, state.auth]);
+  const [theme, { user, accessToken, authReady }] = useSelector((state) => [
+    state.theme,
+    state.auth,
+  ]);
   const dispatch = useDispatch();
   const { signOut } = useAuth();
   const handleLogout = () => signOut();
@@ -25,7 +33,6 @@ const NavBar = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
-
 
   const changeTheme = () => dispatch(toggleMode());
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -68,7 +75,6 @@ const NavBar = () => {
                   <Link
                     to={ROUTE_BLOG}
                     className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
-
                   >
                     All Blogs
                   </Link>
@@ -116,34 +122,38 @@ const NavBar = () => {
                   </svg>
                 </label>
               </div>
-              {!authReady ? <>Loading...</>
-                : user ?
-                  <>
-                    {user.name}
-                    <button className="btn" onClick={handleLogout}>Logout</button>
-                  </>
-                  :
-                  <div className="sm:flex sm:gap-4">
-                    <div className="hidden sm:flex">
-                      <Link
-                        to={ROUTE_LOGIN}
-                        className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
-
-                      >
-                        Login
-                      </Link>
-                    </div>
-                    <div className="hidden sm:flex">
-                      <Link
-                        to={ROUTE_REGISTER}
-                        className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline button hover:text-black"
-
-                      >
-                        Register
-                      </Link>
-                    </div>
+              {!authReady ? (
+                <>Loading...</>
+              ) : user ? (
+                <>
+                  {user.name}
+                  <button
+                    className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <div className="sm:flex sm:gap-4">
+                  <div className="hidden sm:flex">
+                    <Link
+                      to={ROUTE_LOGIN}
+                      className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
+                    >
+                      Login
+                    </Link>
                   </div>
-              }
+                  <div className="hidden sm:flex">
+                    <Link
+                      to={ROUTE_REGISTER}
+                      className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline button hover:text-black"
+                    >
+                      Register
+                    </Link>
+                  </div>
+                </div>
+              )}
 
               <div className="block md:hidden">
                 <button
@@ -173,10 +183,9 @@ const NavBar = () => {
 
       {/* Hamburger menu content */}
       <div
-        className={`md:hidden ${navbarOpen
-          ? "relative flex justify-end z-10 animate fadeIn navAnimation"
-          : "hidden"
-          }`}
+        className={`md:hidden ${
+          navbarOpen ? "relative flex justify-end z-10" : "hidden"
+        }`}
         tabIndex="0"
       >
         <ul className="absolute w-[60%] space-y-4 text-center bg-white dark:bg-black flex flex-col justify-start pb-1">
@@ -199,25 +208,25 @@ const NavBar = () => {
             </a>
           </li>
         </ul>
-        {!user && <div className="absolute flex justify-center w-[60%] gap-5 items-end top-[87px] py-10 pb-7 mt-5 dark:bg-black bg-white">
-          <div className="sm:hidden">
-            <Link
-              to={ROUTE_REGISTER}
-              className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline"
-            >
-              Register
-            </Link>
-          </div>
-          <div className="sm:hidden">
-            <Link
-              to={ROUTE_LOGIN}
-              className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
-
-            >
-              Login
-            </Link>
-          </div>
-          {/* <div className="flex items-center justify-center gap-1">
+        {!user && (
+          <div className="absolute flex justify-center w-[60%] gap-5 items-end top-[87px] py-10 pb-7 mt-5 dark:bg-black bg-white">
+            <div className="sm:hidden">
+              <Link
+                to={ROUTE_REGISTER}
+                className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline"
+              >
+                Register
+              </Link>
+            </div>
+            <div className="sm:hidden">
+              <Link
+                to={ROUTE_LOGIN}
+                className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
+              >
+                Login
+              </Link>
+            </div>
+            {/* <div className="flex items-center justify-center gap-1">
             <img
               src="https://cdn-icons-png.flaticon.com/128/9308/9308891.png"
               alt=""
@@ -227,8 +236,8 @@ const NavBar = () => {
               Profile
             </span>
           </div> */}
-        </div>}
-        {user && user.name}
+          </div>
+        )}
       </div>
     </nav>
   );
