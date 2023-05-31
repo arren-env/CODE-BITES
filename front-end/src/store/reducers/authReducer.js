@@ -28,7 +28,12 @@ const authReducer = (state = defaultAuth, action) => {
         case AUTH_LOGOUT:
             Cookies.remove("accessToken");
             Cookies.remove("refreshToken");
-            return defaultAuth;
+            return {
+                ...state,
+                user: null,
+                accessToken: null,
+                refreshToken: null,
+            };
 
         case UPDATE_USER:
             return { ...state, user: action.payload };
