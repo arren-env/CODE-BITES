@@ -7,7 +7,7 @@ import { ROUTE_BLOG, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_REGISTER } fro
 
 const NavBar = () => {
 
-  const [theme, { user, accessToken }] = useSelector(state => [state.theme, state.auth]);
+  const [theme, { user, accessToken, authReady }] = useSelector(state => [state.theme, state.auth]);
   const dispatch = useDispatch();
   const { signOut } = useAuth();
   const handleLogout = () => signOut();
@@ -116,31 +116,34 @@ const NavBar = () => {
                   </svg>
                 </label>
               </div>
+              {!authReady ? <>Loading...</>
+                : user ?
+                  <>
+                    {user.name}
+                    <button className="btn" onClick={handleLogout}>Logout</button>
+                  </>
+                  :
+                  <div className="sm:flex sm:gap-4">
+                    <div className="hidden sm:flex">
+                      <Link
+                        to={ROUTE_LOGIN}
+                        className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
 
-              {user && <>
-                {user.name}
-                <button className="btn" onClick={handleLogout}>Logout</button>
-              </>}
-              {!user && <div className="sm:flex sm:gap-4">
-                <div className="hidden sm:flex">
-                  <Link
-                    to={ROUTE_LOGIN}
-                    className="bg-myOrange px-5 py-2.5 text-sm font-medium text-black shadow transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-orange-400 duration-200"
+                      >
+                        Login
+                      </Link>
+                    </div>
+                    <div className="hidden sm:flex">
+                      <Link
+                        to={ROUTE_REGISTER}
+                        className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline button hover:text-black"
 
-                  >
-                    Login
-                  </Link>
-                </div>
-                <div className="hidden sm:flex">
-                  <Link
-                    to={ROUTE_REGISTER}
-                    className="bg-white dark:bg-black px-5 py-2.5 text-sm font-medium text-myOrange outline-2 outline button hover:text-black"
-
-                  >
-                    Register
-                  </Link>
-                </div>
-              </div>}
+                      >
+                        Register
+                      </Link>
+                    </div>
+                  </div>
+              }
 
               <div className="block md:hidden">
                 <button

@@ -1,17 +1,16 @@
 
 
-import Cookies from 'js-cookie';
-import { FETCH_USER, updateUser } from '../actions';
+import { FETCH_USER, authLoading, authReady, updateUser } from '../actions';
 import { API_FETCH_USER } from '../constants';
-import { useDispatch } from 'react-redux';
 
 export const authMiddleware = ({ getState, dispatch }) => (next) => async (action) => {
-
+    next(action);
     const accessToken = action.payload // Retrieve the token from your storage mechanism
     const user = getState().auth.user; // Assuming you have stored user data in your auth state
-
+    
     // Check if the token is present and user is not authenticated
     if (accessToken && !user && action.type === FETCH_USER) {
+        dispatch(authLoading());
         // fetch user data
         try {
             const options = {
@@ -25,11 +24,11 @@ export const authMiddleware = ({ getState, dispatch }) => (next) => async (actio
                 dispatch(updateUser(user));
             }
         } catch (error) {
-            console.log('Error fetching user data:', error)
+            console.log('Error fetching user data:', error);
+        }finally{
+            setTimeout(() => {
+                dispatch(authReady());
+            }, 3000);
         }
     }
-
-    setTimeout(() => {
-        next(action);
-    }, 3000);
 };

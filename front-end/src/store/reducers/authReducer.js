@@ -1,10 +1,11 @@
 import Cookies from "js-cookie";
-import { AUTH_LOGIN, AUTH_LOGOUT, UPDATE_ACCESS_TOKEN, UPDATE_USER } from "../actions";
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_NOT_READY, AUTH_READY, UPDATE_ACCESS_TOKEN, UPDATE_USER } from "../actions";
 
 export const defaultAuth = {
     user: null,
     accessToken: Cookies.get("accessToken") || null,
     refreshToken: Cookies.get("refreshToken") || null,
+    authReady: true,
 };
 
 const authReducer = (state = defaultAuth, action) => {
@@ -29,6 +30,9 @@ const authReducer = (state = defaultAuth, action) => {
             Cookies.remove("refreshToken");
             return defaultAuth;
 
+        case UPDATE_USER:
+            return { ...state, user: action.payload };
+
         case UPDATE_ACCESS_TOKEN:
             const newToken = action.payload;
             Cookies.set("accessToken", newToken, { sameSite: true, secure: true });
@@ -37,8 +41,11 @@ const authReducer = (state = defaultAuth, action) => {
                 accessToken: newToken,
             }
 
-        case UPDATE_USER:
-            return { ...state, user: action.payload };
+        case AUTH_READY:
+            return { ...state, authReady: true };
+
+        case AUTH_NOT_READY:
+            return { ...state, authReady: false };
 
         default:
             return state;
