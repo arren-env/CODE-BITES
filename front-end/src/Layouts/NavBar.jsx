@@ -123,7 +123,13 @@ const NavBar = () => {
                 </label>
               </div>
               {!authReady ? (
-                <>Loading...</>
+                <>
+                  {" "}
+                  <svg
+                    className="animate-spin h-5 w-5 mr-3 bg-myOrange"
+                    viewBox="0 0 24 24"
+                  ></svg>
+                </>
               ) : user ? (
                 <>
                   {user.name}
