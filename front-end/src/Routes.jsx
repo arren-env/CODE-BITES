@@ -3,7 +3,9 @@ import { useSelector } from "react-redux";
 import { Navigate, useRoutes } from "react-router-dom";
 import { CreateBlogPage, HomePage, LoginPage, RegistrationPage } from "./Pages";
 import NotFound from "./Pages/NotFound";
-import { ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_NOT_FOUND, ROUTE_REGISTER } from "./store/constants";
+import { ROUTE_BLOGS, ROUTE_BLOG_WITH_ID, ROUTE_CREATE, ROUTE_HOME, ROUTE_LOGIN, ROUTE_NOT_FOUND, ROUTE_REGISTER } from "./store/constants";
+import SingleBlogPage from "./Pages/SingleBlogPage";
+import BlogsPage from "./Pages/BlogsPage";
 
 
 function Routes() {
@@ -20,6 +22,14 @@ function Routes() {
         {
             path: ROUTE_REGISTER,
             element: <RegistrationPage />,
+        },
+        {
+            path: ROUTE_BLOGS,
+            element: <BlogsPage />
+        },
+        {
+            path: ROUTE_BLOG_WITH_ID,
+            element: <SingleBlogPage />
         },
         {
             path: ROUTE_CREATE,

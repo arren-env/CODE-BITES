@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Components/Hooks/useAuth";
 import { fetchUserData, toggleMode } from "../store/actions";
 import {
-  ROUTE_BLOG,
+  ROUTE_BLOGS,
   ROUTE_CREATE,
   ROUTE_HOME,
   ROUTE_LOGIN,
@@ -73,7 +73,7 @@ const NavBar = () => {
 
                 <li>
                   <Link
-                    to={ROUTE_BLOG}
+                    to={ROUTE_BLOGS}
                     className="relative font-medium text-black dark:text-myOrange before:absolute before:-bottom-1 before:h-0.5 before:w-full before:scale-x-0 dark:before:bg-myOrange before:bg-black before:transition hover:before:scale-x-100"
                   >
                     All Blogs

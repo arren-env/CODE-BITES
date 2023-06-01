@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 const handleMultipartData = multer({
     storage,
-    limits: { fileSize: 1000000 * 5 },
+    limits: { fileSize: 1000000 * 10 },
 }).single('image'); // 5mb
 
 const productController = {
@@ -43,13 +43,13 @@ const productController = {
                             );
                         }
                     });
-    
+
                     return next(error);
                     // rootfolder/uploads/filename.png
                 }
             }
-           
-            const { title, story } = req.body;
+
+            const { title, story, createdBy } = req.body;
             let document;
             try {
                 if (filePath) {
@@ -57,11 +57,13 @@ const productController = {
                         title,
                         story,
                         image: filePath,
+                        createdBy
                     });
-                }else{
+                } else {
                     document = await Product.create({
                         title,
                         story,
+                        createdBy
                     });
                 }
             } catch (err) {
@@ -125,12 +127,14 @@ const productController = {
         const imagePath = document._doc.image;
         // http://localhost:5000/uploads/1616444052539-425006577.png
         // approot/http://localhost:5000/uploads/1616444052539-425006577.png
-        fs.unlink(`${appRoot}/${imagePath}`, (err) => {
-            if (err) {
-                return next(CustomErrorHandler.serverError());
-            }
-            return res.json(document);
-        });
+        if (imagePath) {
+            fs.unlink(`${appRoot}/${imagePath}`, (err) => {
+                if (err) {
+                    return next(CustomErrorHandler.serverError());
+                }
+            });
+        }
+        return res.status(200).json({ message: "Successfully Deleted!" });
     },
     async index(req, res, next) {
         let documents;

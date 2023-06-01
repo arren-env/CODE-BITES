@@ -9,7 +9,18 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     var accessToken = useSelector(state => state.auth.accessToken);
+    const userName = useSelector(state => state.auth.user ? state.auth.user.name : 'Unknown');
     const dispatch = useDispatch();
+
+    const getSingleBlog = async (id) => {
+        // GET /products
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+        const blog = await apiRequest(`${BLOG_ENDPOINT}/${id}`, requestOptions);
+        return blog ?? {};
+    };
 
     const getBlogs = async () => {
         // GET /products
@@ -23,10 +34,9 @@ const useFetch = () => {
 
     const createBlog = async (formData) => {
         // POST /products
-        
+
         // If Access Token has expired, it will automatically renew using refresh token
-        if (true) {
-            console.log("refreshing");
+        if (!accessToken) {
             // Fetch new token using refresh token
             const refreshToken = Cookies.get("refreshToken"); // Retrieve the refresh token from storage mechanism
             const reqOptions = {
@@ -37,7 +47,7 @@ const useFetch = () => {
                 body: JSON.stringify({ refresh_token: refreshToken }),
             }
             // Making a request to server's token refresh endpoint
-            var {access_token, refresh_token} = await apiRequest(API_REFRESH_TOKEN_ENDPOINT, reqOptions);
+            var { access_token, refresh_token } = await apiRequest(API_REFRESH_TOKEN_ENDPOINT, reqOptions);
             accessToken = access_token;
             dispatch(renewTokens({
                 accessToken: access_token,
@@ -50,6 +60,9 @@ const useFetch = () => {
                 return;
             }
         }
+
+        // Adding user details
+        formData.append("createdBy", userName || "Unknown");
 
         // Creating request to the server
         const requestOptions = {
@@ -68,8 +81,17 @@ const useFetch = () => {
         return ack;
     }
 
-    const deleteBlog = () => {
+    const deleteBlog = async (id) => {
         // DELETE /products/:id
+        const requestOptions = {
+            method: "DELETE",
+            redirect: "follow",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        };
+        const blog = await apiRequest(`${BLOG_ENDPOINT}/${id}`, requestOptions);
+        return blog ?? {};
     }
 
     const updateBlog = () => {
@@ -84,6 +106,7 @@ const useFetch = () => {
                 throw new Error("Error occured while requesting: " + res.statusText);
             } else {
                 const data = await res.json();
+                console.log(data);
                 if (!data) {
                     throw new Error("Cannot parse JSON data");
                 }
@@ -99,7 +122,7 @@ const useFetch = () => {
         return;
     }
 
-    return { loading, error, getBlogs, createBlog, deleteBlog, updateBlog };
+    return { loading, error, getSingleBlog, getBlogs, createBlog, deleteBlog, updateBlog };
 }
 
 export default useFetch;

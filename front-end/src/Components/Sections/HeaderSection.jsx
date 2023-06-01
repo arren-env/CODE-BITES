@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ROUTE_BLOGS } from "../../store/constants";
 const HeaderSection = () => {
   return (
     <div className="animate fadeInLeft one">
@@ -18,7 +19,7 @@ const HeaderSection = () => {
 
             <div className="mt-4 md:mt-8">
               <Link
-                to="/blog"
+                to={ROUTE_BLOGS}
                 className="group relative inline-block focus:outline-none focus:ring"
               >
                 <span className="absolute inset-0 translate-x-0 translate-y-0 bg-myOrange transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5"></span>

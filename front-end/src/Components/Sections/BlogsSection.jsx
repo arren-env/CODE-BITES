@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../Common/BlogCard";
 import useFetch from "../Hooks/useFetch";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_BLOGS } from "../../store/constants";
 
 const BlogsSection = () => {
 
   const { loading, error, getBlogs } = useFetch();
   const [blogs, setBlogs] = useState([]);
+  const nav = useNavigate();
 
   useEffect(() => {
     getBlogs().then(blogs => setBlogs(blogs));
   }, []);
-  
+
   return (
     <>
       <div className="ml-6 text-xl underline underline-offset-8 text-black dark:text-myOrange ">
@@ -22,7 +25,7 @@ const BlogsSection = () => {
         </>}
 
         {!loading && blogs.length > 0 && blogs.map((blog, index) =>
-          <BlogCard key={index} blog={blog} />
+          <BlogCard key={index} blog={blog} onClick={() => nav(`${ROUTE_BLOGS}/${blog._id}`)} />
         )}
       </div>
     </>

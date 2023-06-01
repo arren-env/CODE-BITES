@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { parseFormData } from "../../utils";
 import useFetch from "../Hooks/useFetch";
+import { useNavigate } from "react-router-dom";
+import { ROUTE_HOME } from "../../store/constants";
 
 function CreateBlogForm() {
 
@@ -11,6 +13,7 @@ function CreateBlogForm() {
     const fileName = useRef();
     const image = useRef(null);
     const { loading, error, createBlog } = useFetch();
+    const nav = useNavigate();
 
     const handleCreateBlog = (e) => {
         e.preventDefault();
@@ -21,13 +24,19 @@ function CreateBlogForm() {
         // }
 
         const formData = new FormData();
-        formData.append("title",title);
-        formData.append("story",story);
+        formData.append("title", title);
+        formData.append("story", story);
         if (image.current.value) {
-            formData.append("image",image.current.files[0]);
+            formData.append("image", image.current.files[0]);
         }
-        createBlog(formData).then(ack=>{
-            console.log(ack);
+        createBlog(formData).then(ack => {
+            window.Swal.fire(
+                'Success',
+                'Successfully created the blog!',
+                'success'
+            ).then(() => {
+                nav(ROUTE_HOME, { replace: true });
+            });
         });
     };
 
@@ -99,7 +108,7 @@ function CreateBlogForm() {
                             <input ref={image} onChange={validateFile} name="image" type="file" id="upload" className="hidden" accept='.jpg,.png,.jpeg' />
                             <i className="material-icons">cloud_upload</i>
                         </label>
-                        <p ref={fileName}></p>
+                        <p className="overflow-hidden" ref={fileName}></p>
                     </div>
 
                     <div className="space-x-5 flex justify-center">
