@@ -8,13 +8,15 @@ const productSchema = new Schema(
         story: { type: String, required: true },
         image: {
             type: String,
-            required: true,
+            // required: true,
             get: (image) => {
                 // http://localhost:5000/uploads/1616443169266-52350494.png
-                if (process.env.ON_HEROKU == 'true') {
-                    return `${image}`;
+                if (image) {
+                    if (process.env.ON_HEROKU == 'true') {
+                        return `${image}`;
+                    }
+                    return `${APP_URL}/${image.replace(/\\/g, '/')}`;
                 }
-                return `${APP_URL}/${image.replace(/\\/g, '/')}`;
             },
         },
     },

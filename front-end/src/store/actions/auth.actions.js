@@ -9,6 +9,8 @@ export const AUTH_NOT_READY = `${AUTH} Not Ready`;
 export const FETCH_USER = `${AUTH} Fetch User`;
 export const UPDATE_USER = `${AUTH} Update User`;
 export const UPDATE_ACCESS_TOKEN = `${AUTH} Update Access Token`;
+export const RENEW_TOKENS = `${AUTH} Renew Tokens`;
+
 
 export const authLogin = (credentials) => ({
     type: AUTH_LOGIN,
@@ -40,4 +42,9 @@ export const authLoading = ()=>({
 
 export const authReady = ()=>({
     type: AUTH_READY,
+})
+
+export const renewTokens = (tokens)=>({
+    type: RENEW_TOKENS,
+    payload: tokens
 })

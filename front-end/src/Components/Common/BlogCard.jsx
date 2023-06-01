@@ -1,4 +1,4 @@
-const BlogCard = ({ product }) => {
+const BlogCard = ({ blog }) => {
   const user = {
     name: "MrJ",
   }
@@ -8,7 +8,7 @@ const BlogCard = ({ product }) => {
         <article className="overflow-hidden shadow transition hover:shadow-lg dark:hover:shadow-zinc-800 hover:scale-105  hover:ease-out">
           <img
             alt="Office"
-            src={product.image || "../src/assets/3.jpg"}
+            src={blog.image || "../src/assets/3.jpg"}
             className="h-36 w-full object-cover"
           />
 
@@ -32,12 +32,12 @@ const BlogCard = ({ product }) => {
 
             <a href="#">
               <h3 className="mt-0.5 text-lg/tight text-gray-900 dark:text-white">
-                {product.title}
+                {blog.title}
               </h3>
             </a>
 
             <p className="mt-2 line-clamp-2 text-sm/snug dark:text-white text-gray-500">
-              {product.story}
+              {blog.story}
             </p>
           </div>
         </article>

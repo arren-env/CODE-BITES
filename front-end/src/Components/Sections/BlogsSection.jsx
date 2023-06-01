@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../Common/BlogCard";
 import useFetch from "../Hooks/useFetch";
-import { PRODUCT_ENDPOINT } from "../../store/constants";
 
 const BlogsSection = () => {
 
-  const { data: products, loading, error } = useFetch(PRODUCT_ENDPOINT);
+  const { loading, error, getBlogs } = useFetch();
+  const [blogs, setBlogs] = useState([]);
 
+  useEffect(() => {
+    getBlogs().then(blogs => setBlogs(blogs));
+  }, []);
+  
   return (
     <>
       <div className="ml-6 text-xl underline underline-offset-8 text-black dark:text-myOrange ">
@@ -17,8 +21,8 @@ const BlogsSection = () => {
           <h2>Loading...</h2>
         </>}
 
-        {!loading && products && products.length > 0 && products.map((product,index) =>
-          <BlogCard key={index} product={product} />
+        {!loading && blogs.length > 0 && blogs.map((blog, index) =>
+          <BlogCard key={index} blog={blog} />
         )}
       </div>
     </>

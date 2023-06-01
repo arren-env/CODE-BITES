@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_NOT_READY, AUTH_READY, UPDATE_ACCESS_TOKEN, UPDATE_USER } from "../actions";
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_NOT_READY, AUTH_READY, RENEW_TOKENS, UPDATE_ACCESS_TOKEN, UPDATE_USER } from "../actions";
 
 export const defaultAuth = {
     user: null,
@@ -44,6 +44,16 @@ const authReducer = (state = defaultAuth, action) => {
             return {
                 ...state,
                 accessToken: newToken,
+            }
+
+        case RENEW_TOKENS:
+            const { accessToken, refreshToken } = action.payload;
+            Cookies.set("accessToken", accessToken, { sameSite: true, secure: true, });
+            Cookies.set("refreshToken", refreshToken, { sameSite: true, secure: true });
+            return {
+                ...state,
+                accessToken,
+                refreshToken
             }
 
         case AUTH_READY:

@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <Layout>
       <HeaderSection />
-      <TrendingSection />
+      {/* <TrendingSection /> */}
       <BlogsSection />
     </Layout>
   );
