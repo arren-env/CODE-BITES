@@ -57,7 +57,7 @@ const BlogCard = (props) => {
                 <p className="text-sm mt-2">
                   {new Date(blog.createdAt).toLocaleDateString()}
                 </p>
-                {blog.createdAt === blog.updatedAt && (
+                {blog.createdAt !== blog.updatedAt && (
                   <span className="mt-2">Last updated at {new Date(blog.updatedAt).toLocaleDateString()}</span>
                 )}
               </div>
