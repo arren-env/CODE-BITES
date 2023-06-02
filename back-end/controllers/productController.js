@@ -49,7 +49,7 @@ const productController = {
                 }
             }
 
-            const { title, story, createdBy } = req.body;
+            const { title, story, user } = req.body;
             let document;
             try {
                 if (filePath) {
@@ -57,13 +57,13 @@ const productController = {
                         title,
                         story,
                         image: filePath,
-                        createdBy
+                        user
                     });
                 } else {
                     document = await Product.create({
                         title,
                         story,
-                        createdBy
+                        user
                     });
                 }
             } catch (err) {
@@ -140,8 +140,8 @@ const productController = {
         let documents;
         // pagination mongoose-pagination
         try {
-            documents = await Product.find()
-                .select('-updatedAt -__v')
+            documents = await Product.find().populate({ path: 'user', select: '-__v' })
+                .select('-__v')
                 .sort({ _id: -1 });
         } catch (err) {
             return next(CustomErrorHandler.serverError());
@@ -151,9 +151,11 @@ const productController = {
     async show(req, res, next) {
         let document;
         try {
-            document = await Product.findOne({ _id: req.params.id }).select(
-                '-updatedAt -__v'
-            );
+            document = await Product.findById(req.params.id)
+                .populate({ path: 'user', select: '-__v' })
+                .select(
+                    '-__v'
+                );
         } catch (err) {
             return next(CustomErrorHandler.serverError());
         }
@@ -164,7 +166,7 @@ const productController = {
         try {
             documents = await Product.find({
                 _id: { $in: req.body.ids },
-            }).select('-updatedAt -__v');
+            }).select('-__v');
         } catch (err) {
             return next(CustomErrorHandler.serverError());
         }

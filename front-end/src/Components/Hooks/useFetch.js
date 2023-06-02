@@ -9,7 +9,7 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     var accessToken = useSelector(state => state.auth.accessToken);
-    const userName = useSelector(state => state.auth.user ? state.auth.user.name : 'Unknown');
+    const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
 
     const getSingleBlog = async (id) => {
@@ -62,7 +62,7 @@ const useFetch = () => {
         }
 
         // Adding user details
-        formData.append("createdBy", userName || "Unknown");
+        formData.append('user', user._id);
 
         // Creating request to the server
         const requestOptions = {
@@ -106,7 +106,6 @@ const useFetch = () => {
                 throw new Error("Error occured while requesting: " + res.statusText);
             } else {
                 const data = await res.json();
-                console.log(data);
                 if (!data) {
                     throw new Error("Cannot parse JSON data");
                 }

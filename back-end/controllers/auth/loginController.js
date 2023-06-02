@@ -19,7 +19,7 @@ const loginController = {
         }
 
         try {
-            const user = await User.findOne({ email: req.body.email });
+            const user = await User.findOne({ email: req.body.email }).select("+password");
             if (!user) {
                 return next(CustomErrorHandler.wrongCredentials());
             }
@@ -31,7 +31,7 @@ const loginController = {
 
             // Toekn
             const access_token = JwtService.sign({ _id: user._id, role: user.role });
-            const refresh_token = JwtService.sign({ _id: user._id, role: user.role }, '1y', REFRESH_SECRET);
+            const refresh_token = JwtService.sign({ _id: user._id, role: user.role }, '31d', REFRESH_SECRET);
             // database whitelist
             await RefreshToken.create({ token: refresh_token });
             res.json({ access_token, refresh_token, user });

@@ -6,7 +6,6 @@ const productSchema = new Schema(
     {
         title: { type: String, required: true },
         story: { type: String, required: true },
-        createdBy: {type: String, required: true},
         image: {
             type: String,
             // required: true,
@@ -20,6 +19,11 @@ const productSchema = new Schema(
                 }
             },
         },
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+
     },
     { timestamps: true, toJSON: { getters: true }, id: false }
 );

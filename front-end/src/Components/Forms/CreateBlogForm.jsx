@@ -30,6 +30,7 @@ function CreateBlogForm() {
             formData.append("image", image.current.files[0]);
         }
         createBlog(formData).then(ack => {
+            console.log(ack);
             window.Swal.fire(
                 'Success',
                 'Successfully created the blog!',
