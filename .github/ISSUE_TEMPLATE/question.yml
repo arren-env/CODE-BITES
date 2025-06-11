@@ -1,0 +1,74 @@
+name: Question or Support
+description: Ask a question or get help with CODE BITES
+title: "[QUESTION] "
+labels: ["question", "support"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out! 🤝
+        
+        Please check our documentation and existing discussions before asking a new question.
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Type of Question
+      description: What kind of help do you need?
+      options:
+        - Setup and Installation
+        - Usage and Features
+        - Development and Contributing
+        - Deployment and Production
+        - Troubleshooting
+        - Best Practices
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Please describe your question in detail
+      placeholder: What would you like to know?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide any relevant context or background information
+      placeholder: |
+        - What are you trying to achieve?
+        - What have you tried so far?
+        - Any relevant setup details?
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: If relevant, please provide your environment details
+      placeholder: |
+        - OS: 
+        - Node.js version: 
+        - Browser: 
+        - Any other relevant information:
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      description: Please confirm you have done the following
+      options:
+        - label: I have read the README and documentation
+          required: true
+        - label: I have searched existing issues and discussions
+          required: true
+        - label: This is not a bug report (use the bug report template instead)
+          required: true
